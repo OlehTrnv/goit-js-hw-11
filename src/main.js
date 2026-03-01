@@ -13,6 +13,14 @@ function handleSubmit(event) {
     event.preventDefault();
 
     const inputValue = document.querySelector('[name="search-text"]').value;
+    if (inputValue.trim() === "") {
+        iziToast.show({
+            message: "You need to type sonething for searching.",
+            color: "red",
+            position: "topRight"
+        });
+        return;
+    }
     clearGallery();
     showLoader();
     getImagesByQuery(inputValue)
@@ -31,6 +39,11 @@ function handleSubmit(event) {
         }
             )
         .catch(reject => {
+            iziToast.show({
+                message: "Something went wrong. Please try again!",
+                color: 'red',
+                position: 'topRight'
+            });
             hideLoader();
     })
         
